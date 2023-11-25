@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "mars"
+version = "0.1.0"
+description = "A multi-agent LLM system to research and document in collaboration with a user using modern techniques such as chain-of-thought reasoning"
+authors = ["Reuben John <reubenvjohn@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
