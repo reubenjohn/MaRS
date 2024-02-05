@@ -6,10 +6,47 @@ authors = ["Reuben John <reubenvjohn@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.5"
+python = "^3.8"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+coverage = {extras = ["toml"], version = "^7.3.2"}
+
+# Coverage configs
+
+[tool.coverage.run]
+omit = [".*", "*/__init__.py", "*/test/*", "*/site-packages/*"]
+source = ["mars"]
+data_file = ".coverage/.coverage"
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+
+    "pragma: no cover"
+    ]
+
+[tool.coverage.json]
+output = ".coverage/coverage.json"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-

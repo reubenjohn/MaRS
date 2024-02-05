@@ -1,0 +1,25 @@
+name: CI
+on: [ pull_request ]
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: [ "3.10" ] # Disabled other python versions for faster CI runs: "3.8", "3.9"
+        poetry-version: [ "1.2.2" ]
+        os: [ ubuntu-22.04 ] # Disabled macos-latest for faster CI runs
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install poetry project (and dependency)
+        run: poetry install
+      - name: Test poetry project and generate coverage
+        run: poetry run coverage run -m pytest && poetry run coverage json
