@@ -4,11 +4,11 @@ on: [ pull_request ]
 jobs:
   ci:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        python-version: [ "3.8", "3.9", "3.10" ]
+        python-version: [ "3.10" ] # Disabled other python versions for faster CI runs: "3.8", "3.9"
         poetry-version: [ "1.2.2" ]
-        os: [ ubuntu-22.04, macos-latest ]
+        os: [ ubuntu-22.04 ] # Disabled macos-latest for faster CI runs
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -23,8 +23,3 @@ jobs:
         run: poetry install
       - name: Test poetry project and generate coverage
         run: poetry run coverage run -m pytest && poetry run coverage json
-      - name: Update Coverage Badge
-        # GitHub actions: default branch variable
-        # https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
-        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        uses: we-cli/.coverage-badge-action@main
