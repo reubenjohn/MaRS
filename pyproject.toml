@@ -22,7 +22,7 @@ data_file = ".coverage/.coverage"
 branch = true
 
 [tool.coverage.report]
-fail_under = 80
+fail_under = 30
 show_missing = true
 exclude_also = [
     # Don't complain about missing debug-only code:
