@@ -4,7 +4,7 @@ from langchain_openai import ChatOpenAI
 
 from mars.tools.web_browsing import internet_search, read_webpage
 
-llm = ChatOpenAI(model="gpt-4-turbo-preview")
+llm = ChatOpenAI(model="gpt-3.5-turbo-0125")  # gpt-4-turbo-preview
 
 
 def create_agent(llm: ChatOpenAI, tools: list, system_prompt: str):
